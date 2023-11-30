@@ -31,7 +31,7 @@
             "get": {
                 "tags": ["Usuarios"],
                 "summary": "Listado de todos los usuarios que existen en la plataforma",
-                "description": "Servicio que devuelve la informacion detallada de los usuarios de la plataforma",
+                "description": "Servicio que devuelve la informacion detallada de los usuarios de la plataforma.",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -49,15 +49,142 @@
                             ]
                         },
                         "schema": {
-                            "$ref": "#/definitions/users"
+                            "$ref": "#/definitions/usuario"
                         }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Crea un nuevo usuario en la plataforma",
+                "description": "Servicio que permite crear un nuevo usuario en la plataforma.",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": ["Usuarios"],
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "Usuario a agregar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevoUsuario"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/users/{id}": {
+            "get": {
+                "tags": ["Usuarios"],
+                "summary": "Ver un usuario existente de la plataforma",
+                "description": "Servicio que permite ver la informacion de un usuario.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 3,
+                                    "full_name": "Example Name",
+                                    "email": "email@example.com",
+                                    "password": "example",
+                                    "phone_number": "123456789",
+                                    "address": "Example Address",
+                                    "role": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/usuario"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del usuario",
+                        "type": "number",
+                        "default": 1
+                    }
+                ]
+            },
+            "put": {
+                "tags": ["Usuarios"],
+                "summary": "Modifica la informacion de un usuario",
+                "description": "Servicio que permite modificar la informacion de un usuario.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "type": "number",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "usuario",
+                        "in": "body",
+                        "description": "Usuario a modificar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevoUsuario"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Usuarios"],
+                "summary": "Elimina a un usuario",
+                "description": "Servicio que permite eliminar a un usuario de la plataforma.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "type": "number",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
                     }
                 }
             }
         }
     },
     "definitions": {
-        "user": {
+        "usuario": {
             "type": "object",
             "properties": {
                 "id": {
@@ -90,10 +217,39 @@
                 }
             }
         },
-        "users": {
+        "usuarios": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/users"
+                "$ref": "#/definitions/usuario"
+            }
+        },
+        "nuevoUsuario": {
+            "type": "object",
+            "properties": {
+                "full_name": {
+                    "type": "string",
+                    "description": "Nombre del usuario."
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Correo electronico del usuario."
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Contrasena del usuario."
+                },
+                "phone_number": {
+                    "type": "string",
+                    "description": "Numero telefonico del usuario."
+                },
+                "address": {
+                    "type": "string",
+                    "description": "Direccion del domicilio del usuario."
+                },
+                "role": {
+                    "type": "number",
+                    "description": "ID del rol del usuario."
+                }
             }
         }
     }
