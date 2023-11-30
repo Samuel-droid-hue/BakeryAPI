@@ -9,11 +9,11 @@ class UsersRoutes {
     }
 
     config(): void {
-        this.router.get('/', usersControllers.show_users);
-        this.router.get('/:id', usersControllers.show_user);
-        this.router.post('/', usersControllers.new_user);
-        this.router.put('/:id', usersControllers.update_user);
-        this.router.delete('/:id', usersControllers.delete_user);
+        this.router.get('/', usersControllers.getUsers);
+        this.router.get('/:id', usersControllers.getUser);
+        this.router.post('/', usersControllers.createUser);
+        this.router.put('/:id', usersControllers.updateUser);
+        this.router.delete('/:id', usersControllers.deleteUser);
     }
 }
 

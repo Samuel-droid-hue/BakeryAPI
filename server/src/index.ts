@@ -1,8 +1,9 @@
 import express, {Application} from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import { usersControllers } from './controllers/usersControllers';
 import usersRoutes from './routes/usersRoutes';
+import swagger_ui_express from 'swagger-ui-express';
+import swaggerDocument from './swagger.json';
 
 class Server {
     public app: Application;
@@ -10,6 +11,7 @@ class Server {
         this.app= express();
         this.config();
         this.routes();
+        this.app.use('/documentation', swagger_ui_express.serve, swagger_ui_express.setup(swaggerDocument));
     }
 
     config (): void {

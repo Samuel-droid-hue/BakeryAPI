@@ -8,11 +8,11 @@ class UsersRoutes {
         this.config();
     }
     config() {
-        this.router.get('/', usersControllers_1.usersControllers.show_users);
-        this.router.get('/:id', usersControllers_1.usersControllers.show_user);
-        this.router.post('/', usersControllers_1.usersControllers.new_user);
-        this.router.put('/:id', usersControllers_1.usersControllers.update_user);
-        this.router.delete('/:id', usersControllers_1.usersControllers.delete_user);
+        this.router.get('/', usersControllers_1.usersControllers.getUsers);
+        this.router.get('/:id', usersControllers_1.usersControllers.getUser);
+        this.router.post('/', usersControllers_1.usersControllers.createUser);
+        this.router.put('/:id', usersControllers_1.usersControllers.updateUser);
+        this.router.delete('/:id', usersControllers_1.usersControllers.deleteUser);
     }
 }
 const usersRoutes = new UsersRoutes();

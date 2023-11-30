@@ -7,11 +7,14 @@ const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 const usersRoutes_1 = __importDefault(require("./routes/usersRoutes"));
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const swagger_json_1 = __importDefault(require("./swagger.json"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
         this.config();
         this.routes();
+        this.app.use('/documentation', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_json_1.default));
     }
     config() {
         this.app.set('port', process.env.PORT || 3000);
