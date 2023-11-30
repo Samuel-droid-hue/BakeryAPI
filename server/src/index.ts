@@ -21,7 +21,7 @@ class Server {
     }
 
     routes (): void {
-        this.app.use('/api/', usersRoutes);
+        this.app.use('/api/users/', usersRoutes);
     }
 
     start (): void {
