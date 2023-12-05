@@ -15,6 +15,18 @@
         {
             "name": "Usuarios",
             "description": "API para obtener la informacion de los usuarios de la plataforma"
+        },
+        {
+            "name": "Panes",
+            "description": "API para obtener la informacion de los panes de la panaderia"
+        },
+        {
+            "name": "Ingredientes",
+            "description": "API para obtener los ingredientes de un pan"
+        },
+        {
+            "name": "Categorias",
+            "description": "API para obtener las categorias de un pan"
         }
     ],
     "schemes": [
@@ -181,6 +193,119 @@
                     }
                 }
             }
+        },
+        "/api/breads/": {
+            "get": {
+                "tags": ["Panes"],
+                "summary": "Lista de todos los panes en exhibicion",
+                "description": "Servicio que devuelve una lista de los panes en exhibicion",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "id": 1,
+                            "name": "Example Bread 1",
+                            "description": "Example description 1",
+                            "price": 2.34
+                        }, "schema": {
+                            "$ref": "#/definitions/pan"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/breads/{id}": {
+            "get": {
+                "tags": ["Panes"],
+                "description": "Servicio que devuelve la informacion de un pan",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "id": 1,
+                            "name": "Example Bread 1",
+                            "description": "Example description 1",
+                            "price": 2.34
+                        }, "schema": {
+                            "$ref": "#/definitions/pan"
+                        }
+                    }, "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del pan",
+                        "type": "number",
+                        "default": 1
+                    }
+                ]
+            }
+        },
+        "/api/others/ingredients": {
+            "get": {
+                "tags": ["Ingredientes"],
+                "summary": "Lista todos los ingredientes",
+                "description": "Servicio que devuelve una lista de los ingredientes para la elaboracion de un pan",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 1,
+                                    "name": "Example Ingredient 1"
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "Example Ingredient 2"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/otros"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/others/categories": {
+            "get": {
+                "tags": ["Categorias"],
+                "description": "Servicio que devuelve una lista de las categorias de un pan",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 1,
+                                    "name": "Example Category 1"
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "Example Category 2"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/otros"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -249,6 +374,40 @@
                 "role": {
                     "type": "number",
                     "description": "ID del rol del usuario."
+                }
+            }
+        },
+        "pan": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "ID del pan"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Nombre del pan"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Descripcion acerca del pan"
+                },
+                "price": {
+                    "type": "float",
+                    "description": "Precio del pan"
+                }
+            }
+        },
+        "otros": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "ID del objeto"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Nombre del objeto"
                 }
             }
         }
