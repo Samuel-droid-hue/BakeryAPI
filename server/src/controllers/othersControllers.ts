@@ -2,13 +2,8 @@ import { Request, Response } from "express";
 import pool from "../database";
 
 class OthersControllers {
-    public async getIngredients(req: Request, res: Response): Promise<void> {
-        const answer = await pool.query('SELECT * FROM Ingredient');
-        res.json(answer);
-    }
-
     public async getCategories(req: Request, res: Response): Promise<void> {
-        const answer = await pool.query('SELECT * FROM BreadCategory');
+        const answer = await pool.query('SELECT * FROM CategoriesItems');
         res.json(answer)
     }
 }

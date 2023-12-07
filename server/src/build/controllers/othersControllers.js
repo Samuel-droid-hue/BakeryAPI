@@ -15,15 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.othersControllers = void 0;
 const database_1 = __importDefault(require("../database"));
 class OthersControllers {
-    getIngredients(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const answer = yield database_1.default.query('SELECT * FROM Ingredient');
-            res.json(answer);
-        });
-    }
     getCategories(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const answer = yield database_1.default.query('SELECT * FROM BreadCategory');
+            const answer = yield database_1.default.query('SELECT * FROM CategoriesItems');
             res.json(answer);
         });
     }

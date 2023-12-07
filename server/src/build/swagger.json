@@ -21,10 +21,6 @@
             "description": "API para obtener la informacion de los panes de la panaderia"
         },
         {
-            "name": "Ingredientes",
-            "description": "API para obtener los ingredientes de un pan"
-        },
-        {
             "name": "Categorias",
             "description": "API para obtener las categorias de un pan"
         }
@@ -246,36 +242,6 @@
                         "default": 1
                     }
                 ]
-            }
-        },
-        "/api/others/ingredients": {
-            "get": {
-                "tags": ["Ingredientes"],
-                "summary": "Lista todos los ingredientes",
-                "description": "Servicio que devuelve una lista de los ingredientes para la elaboracion de un pan",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "examples": {
-                            "application/json": [
-                                {
-                                    "id": 1,
-                                    "name": "Example Ingredient 1"
-                                },
-                                {
-                                    "id": 2,
-                                    "name": "Example Ingredient 2"
-                                }
-                            ]
-                        },
-                        "schema": {
-                            "$ref": "#/definitions/otros"
-                        }
-                    },
-                    "403": {
-                        "description": "Prohibido"
-                    }
-                }
             }
         },
         "/api/others/categories": {

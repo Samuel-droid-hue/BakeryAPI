@@ -9,7 +9,6 @@ class OthersRoutes {
     }
 
     config(): void {
-        this.router.get('/ingredients', othersControllers.getIngredients);
         this.router.get('/categories', othersControllers.getCategories);
     }
 }

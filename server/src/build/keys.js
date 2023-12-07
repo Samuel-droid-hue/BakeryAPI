@@ -5,6 +5,6 @@ exports.default = {
         host: 'localhost',
         user: 'ismael',
         password: '123',
-        database: 'BakeryStoreDB'
+        database: 'DoughHub'
     }
 };
