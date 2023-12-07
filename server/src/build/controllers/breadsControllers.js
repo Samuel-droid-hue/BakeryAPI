@@ -15,9 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.breadsControllers = void 0;
 const database_1 = __importDefault(require("../database"));
 class BreadsControllers {
-    getBreads(req, res) {
+    getItems(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const answer = yield database_1.default.query('SELECT * FROM Bread');
+            const answer = yield database_1.default.query('SELECT * FROM BakeryItems');
             res.json(answer);
         });
     }

@@ -9,7 +9,7 @@ class BreadsRoutes {
     }
 
     config(): void {
-        this.router.get('/', breadsControllers.getBreads);
+        this.router.get('/', breadsControllers.getItems);
         this.router.get('/:id', breadsControllers.getBread);
     }
 }

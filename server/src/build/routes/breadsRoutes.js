@@ -8,7 +8,7 @@ class BreadsRoutes {
         this.config();
     }
     config() {
-        this.router.get('/', breadsControllers_1.breadsControllers.getBreads);
+        this.router.get('/', breadsControllers_1.breadsControllers.getItems);
         this.router.get('/:id', breadsControllers_1.breadsControllers.getBread);
     }
 }

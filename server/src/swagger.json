@@ -3,10 +3,10 @@
     "info": {
         "version": "1.0.0",
         "title": "Bakery API",
-        "description": "Esta es la documentacion de la API para el sistema de una panaderia online con servicio a domicilio",
+        "description": "Esta es la documentacion de la API para el sistema de una panaderia online con servicio a domicilio.",
         "license": {
-            "name": "SGC",
-            "url": "htts://www.google.com"
+            "name": "SIGC",
+            "url": "https://github.com/Samuel-droid-hue/BakeryAPI/tree/main/server"
         }
     },
     "host": "localhost:3000",
@@ -14,15 +14,15 @@
     "tags": [
         {
             "name": "Usuarios",
-            "description": "API para obtener la informacion de los usuarios de la plataforma"
+            "description": "API para obtener informacion acerca de los usuarios de la plataforma."
         },
         {
-            "name": "Panes",
-            "description": "API para obtener la informacion de los panes de la panaderia"
+            "name": "Productos",
+            "description": "API para obtener informacion acerca los productos de la panaderia."
         },
         {
-            "name": "Categorias",
-            "description": "API para obtener las categorias de un pan"
+            "name": "Categorias de Productos",
+            "description": "API para obtener informacion acerca de las categorias de los productos."
         }
     ],
     "schemes": [
@@ -38,24 +38,31 @@
         "/api/users": {
             "get": {
                 "tags": ["Usuarios"],
-                "summary": "Listado de todos los usuarios que existen en la plataforma",
-                "description": "Servicio que devuelve la informacion detallada de los usuarios de la plataforma.",
+                "summary": "Obtener una lista de los usuarios",
+                "description": "<html>Este servicio devuelve una lista completa de todos los usuarios registrados en la plataforma.<br><br>Proporciona información detallada, incluyendo: <br> <ul> <li>Nombre completo</li><li>Direccion de correo electrónico</li><li>Número de teléfono</li><li>Direccion</li><li>Rol de usuario</li></ul></html>.",
                 "responses": {
                     "200": {
                         "description": "OK",
-                        "examples": {
-                            "application/json": [
-                                {
-                                    "id": 1,
-                                    "full_name": "Example Name",
-                                    "email": "email@example.com",
-                                    "password": "example",
-                                    "phone_number": "123456789",
-                                    "address": "Example Address",
-                                    "role": 1
-                                }
-                            ]
-                        },
+                        "examples": [
+                            {
+                                "id": 1,
+                                "full_name": "Ejemplo Nombre",
+                                "email": "correo@ejemplo.com",
+                                "password": "secreto",
+                                "phone_number": "123456789",
+                                "address": "Ejemplo Dirección",
+                                "role": 1
+                            },
+                            {
+                                "id": 2,
+                                "full_name": "Otro Ejemplo",
+                                "email": "otro@ejemplo.com",
+                                "password": "secreto2",
+                                "phone_number": "987654321",
+                                "address": "Otra Dirección",
+                                "role": 2
+                            }
+                        ],
                         "schema": {
                             "$ref": "#/definitions/usuario"
                         }
@@ -66,12 +73,9 @@
                 }
             },
             "post": {
-                "summary": "Crea un nuevo usuario en la plataforma",
-                "description": "Servicio que permite crear un nuevo usuario en la plataforma.",
-                "operationId": "create",
-                "produces": [
-                    "application/json"
-                ],
+                "summary": "Registro de nuevo usuario",
+                "description": "<html>Este servicio permite agregar un nuevo usuario a la plataforma.<br><br>Debera proporcionar la información detallada del usuario: <ul><li>Nombre completo</li><li>Correo electrónico</li><li>Contraseña</li><li>Número de teléfono</li><li>Dirección</li><li>Rol</li></ul></html>",
+                "produces": ["application/json"],
                 "tags": ["Usuarios"],
                 "parameters": [
                     {
@@ -97,8 +101,8 @@
         "/api/users/{id}": {
             "get": {
                 "tags": ["Usuarios"],
-                "summary": "Ver un usuario existente de la plataforma",
-                "description": "Servicio que permite ver la informacion de un usuario.",
+                "summary": "Ver un usuario especifico existente en la plataforma",
+                "description": "Servicio que permite ver la <em>información</em> detallada de un <strong>usuario específico</strong>. <br> <br>Este servicio devuelve la información completa, incluyendo ID, nombre completo, correo electrónico, contraseña, número de teléfono, dirección y rol. <br> <br> **Nota:** Se requiere el ID del usuario como parámetro en la ruta.",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -106,11 +110,11 @@
                             "application/json": [
                                 {
                                     "id": 3,
-                                    "full_name": "Example Name",
-                                    "email": "email@example.com",
-                                    "password": "example",
+                                    "full_name": "Ejemplo de Nombre",
+                                    "email": "correo@ejemplo.com",
+                                    "password": "ejemplo",
                                     "phone_number": "123456789",
-                                    "address": "Example Address",
+                                    "address": "Dirección de Ejemplo",
                                     "role": 1
                                 }
                             ]
@@ -136,8 +140,8 @@
             },
             "put": {
                 "tags": ["Usuarios"],
-                "summary": "Modifica la informacion de un usuario",
-                "description": "Servicio que permite modificar la informacion de un usuario.",
+                "summary": "Modifica la información de un usuario",
+                "description": "Este servicio permite realizar modificaciones en la <em>información</em> de un <strong>usuario existente</strong>. <br> <br>Para utilizar este servicio, envía una solicitud con los datos actualizados del usuario. La respuesta contendrá la información modificada. <br> <br> **Nota:** Asegúrate de proporcionar todos los campos necesarios en la solicitud, incluyendo el ID del usuario que se va a modificar.",
                 "parameters": [
                     {
                         "name": "id",
@@ -168,8 +172,8 @@
             },
             "delete": {
                 "tags": ["Usuarios"],
-                "summary": "Elimina a un usuario",
-                "description": "Servicio que permite eliminar a un usuario de la plataforma.",
+                "summary": "Eliminar a un usuario",
+                "description": "Este servicio permite eliminar a un <strong>usuario</strong> de la plataforma. <br> <br> Al utilizar este servicio, se eliminarán todos los datos asociados con el usuario especificado. <br> <br> **Nota:** Esta acción es irreversible y eliminará permanentemente la cuenta del usuario.",
                 "parameters": [
                     {
                         "name": "id",
@@ -192,9 +196,9 @@
         },
         "/api/breads/": {
             "get": {
-                "tags": ["Panes"], 
-                "summary": "Lista de todos los panes en exhibicion",
-                "description": "Servicio que devuelve una lista de los panes en exhibicion",
+                "tags": ["Productos"], 
+                "summary": "Lista de todos los panes en exhibición.",
+                "description": "Este servicio devuelve una lista completa de los <strong>panes en exhibición</strong> disponibles en la plataforma. <br> <br>Proporciona información detallada, incluyendo: <br><ul><li>Nombre del pan</li><li>Descripción</li><li>Precio</li> <li>Imagen del pan</li></ul>",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -215,8 +219,9 @@
         },
         "/api/breads/{id}": {
             "get": {
-                "tags": ["Panes"],
-                "description": "Servicio que devuelve la informacion de un pan",
+                "tags": ["Productos"],
+                "summary": "Devolver información de un <strong>pan</strong>",
+                "description": "Este servicio devuelve la <em>información</em> detallada de un <strong>pan específico</strong>. <br> <br>",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -246,7 +251,7 @@
         },
         "/api/others/categories": {
             "get": {
-                "tags": ["Categorias"],
+                "tags": ["Categorias de Productos"],
                 "description": "Servicio que devuelve una lista de las categorias de un pan",
                 "responses": {
                     "200": {

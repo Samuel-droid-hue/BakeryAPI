@@ -17,19 +17,42 @@ const database_1 = __importDefault(require("../database"));
 class UsersControllers {
     getUsers(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const answer = yield database_1.default.query('SELECT * FROM Users');
+            const answer = yield database_1.default.query(`
+            SELECT 
+                Users.id, 
+                Users.full_name, 
+                Users.email,  
+                Users.password, 
+                Users.phone_number, 
+                Users.address, 
+                Roles.name AS role
+            FROM Users
+            JOIN Roles ON Users.role = Roles.id
+        `);
             res.json(answer);
         });
     }
     getUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const answer = yield database_1.default.query('SELECT * FROM Users WHERE id = ?', [id]);
+            const answer = yield database_1.default.query(`
+            SELECT 
+                Users.id, 
+                Users.full_name, 
+                Users.email, 
+                Users.password, 
+                Users.phone_number, 
+                Users.address, 
+                Roles.name AS role
+            FROM Users
+            JOIN Roles ON Users.role = Roles.id
+            WHERE Users.id = ?
+        `, [id]);
             if (answer.length > 0) {
                 res.json(answer[0]);
                 return;
             }
-            res.status(404).json({ 'message': 'User not found!' });
+            res.status(404).json({ 'message': 'Usuario no encontrado!' });
         });
     }
     createUser(req, res) {
