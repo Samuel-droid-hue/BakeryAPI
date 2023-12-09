@@ -17,19 +17,37 @@ const database_1 = __importDefault(require("../database"));
 class ProductsControllers {
     getItems(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const answer = yield database_1.default.query('SELECT * FROM BakeryItems');
+            const answer = yield database_1.default.query(`SELECT 
+            BakeryItems.id, 
+            BakeryItems.name, 
+            BakeryItems.description, 
+            BakeryItems.price, 
+            BakeryItems.quantity_available, 
+            CategoriesItems.name AS category
+        FROM BakeryItems
+        JOIN CategoriesItems ON BakeryItems.category = CategoriesItems.id
+        WHERE BakeryItems.quantity_available > 0`);
             res.json(answer);
         });
     }
     getItem(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const answer = yield database_1.default.query('SELECT * FROM Bread WHERE id = ?', [id]);
+            const answer = yield database_1.default.query(`SELECT 
+            BakeryItems.id, 
+            BakeryItems.name, 
+            BakeryItems.description, 
+            BakeryItems.price, 
+            BakeryItems.quantity_available, 
+            CategoriesItems.name AS category
+        FROM BakeryItems
+        JOIN CategoriesItems ON BakeryItems.category = CategoriesItems.id
+        WHERE BakeryItems.id = ? AND BakeryItems.quantity_available > 0`, [id]);
             if (answer.length > 0) {
                 res.json(answer[0]);
                 return;
             }
-            res.status(404).json({ 'message': 'Bread not found!' });
+            res.status(404).json({ 'message': 'Producto no existente en exhibicion!' });
         });
     }
 }

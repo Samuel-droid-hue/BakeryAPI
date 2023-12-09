@@ -38,8 +38,10 @@
     "produces": [
         "application/json"
     ],
+
     "paths": {
-        "/api/users": {
+
+        "/api/users/": {
             "get": {
                 "tags": ["Usuarios"],
                 "summary": "Obtener una lista de los usuarios",
@@ -76,6 +78,7 @@
                     }
                 }
             },
+
             "post": {
                 "summary": "Registro de nuevo usuario",
                 "description": "<html>Este servicio permite agregar un nuevo usuario a la plataforma.<br><br>Debera proporcionar la información detallada del usuario: <ul><li>Nombre completo</li><li>Correo electrónico</li><li>Contraseña</li><li>Número de teléfono</li><li>Dirección</li><li>Rol</li></ul></html>",
@@ -102,6 +105,7 @@
                 }
             }
         },
+
         "/api/users/{id}": {
             "get": {
                 "tags": ["Usuarios"],
@@ -142,6 +146,7 @@
                     }
                 ]
             },
+
             "put": {
                 "tags": ["Usuarios"],
                 "summary": "Modifica la información de un usuario",
@@ -174,6 +179,7 @@
                     }
                 }
             },
+
             "delete": {
                 "tags": ["Usuarios"],
                 "summary": "Eliminar a un usuario",
@@ -198,6 +204,7 @@
                 }
             }
         },
+
         "/api/auth/": {
             "get": {
                 "tags": ["Autenticacion"], 
@@ -244,6 +251,7 @@
                 ]
             }
         },
+
         "/api/products/": {
             "get": {
                 "tags": ["Productos"], 
@@ -260,7 +268,7 @@
                             "quantity_available": 2,
                             "category": "Categoria del producto"
                         }, "schema": {
-                            "$ref": "#/definitions/pan"
+                            "$ref": "#/definitions/producto"
                         }
                     },
                     "403": {
@@ -269,21 +277,24 @@
                 }
             }
         },
-        "/api/breads/{id}": {
+
+        "/api/products/{id}": {
             "get": {
                 "tags": ["Productos"],
-                "summary": "Devolver información de un <strong>pan</strong>",
-                "description": "Este servicio devuelve la <em>información</em> detallada de un <strong>pan específico</strong>. <br> <br>",
+                "summary": "Lista la informacion de un solo producto.",
+                "description": "Este servicio devuelve la <em>información</em> detallada de un <strong>unico producto específico</strong>. <br> <br>",
                 "responses": {
                     "200": {
                         "description": "OK",
                         "examples": {
                             "id": 1,
-                            "name": "Example Bread 1",
-                            "description": "Example description 1",
-                            "price": 2.34
+                            "name": "Ejemplo producto 1",
+                            "description": "Descripcion del producto 1",
+                            "price": 2.34,
+                            "quantity_available": 2,
+                            "category": "Categoria del producto"
                         }, "schema": {
-                            "$ref": "#/definitions/pan"
+                            "$ref": "#/definitions/producto"
                         }
                     }, "403": {
                         "description": "Prohibido"
@@ -301,7 +312,8 @@
                 ]
             }
         },
-        "/api/others/categories": {
+
+        "/api/others/categories/": {
             "get": {
                 "tags": ["Categorias de Productos"],
                 "description": "Servicio que devuelve una lista de las categorias de un pan",
@@ -331,6 +343,7 @@
             }
         }
     },
+
     "definitions": {
         "usuario": {
             "type": "object",
@@ -400,24 +413,29 @@
                 }
             }
         },
-        "pan": {
+        "producto": {
             "type": "object",
             "properties": {
                 "id": {
                     "type": "number",
-                    "description": "ID del pan"
+                    "description": "ID del producto"
                 }, 
                 "name": {
                     "type": "string",
-                    "description": "Nombre del pan"
+                    "description": "Nombre del producto"
                 },
                 "description": {
                     "type": "string",
-                    "description": "Descripcion acerca del pan"
+                    "description": "Descripcion acerca del producto"
                 },
                 "price": {
-                    "type": "float",
-                    "description": "Precio del pan"
+                    "type": "number",
+                    "format": "float",
+                    "description": "Precio del producto"
+                },
+                "quantity_available": {
+                    "type": "number",
+                    "description": "Cantidad disponible en stock"
                 }
             }
         },

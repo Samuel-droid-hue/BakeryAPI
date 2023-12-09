@@ -260,7 +260,7 @@
                             "quantity_available": 2,
                             "category": "Categoria del producto"
                         }, "schema": {
-                            "$ref": "#/definitions/pan"
+                            "$ref": "#/definitions/producto"
                         }
                     },
                     "403": {
@@ -269,21 +269,23 @@
                 }
             }
         },
-        "/api/breads/{id}": {
+        "/api/products/{id}": {
             "get": {
                 "tags": ["Productos"],
-                "summary": "Devolver información de un <strong>pan</strong>",
-                "description": "Este servicio devuelve la <em>información</em> detallada de un <strong>pan específico</strong>. <br> <br>",
+                "summary": "Lista la informacion de un solo producto.",
+                "description": "Este servicio devuelve la <em>información</em> detallada de un <strong>unico producto específico</strong>. <br> <br>",
                 "responses": {
                     "200": {
                         "description": "OK",
                         "examples": {
                             "id": 1,
-                            "name": "Example Bread 1",
-                            "description": "Example description 1",
-                            "price": 2.34
+                            "name": "Ejemplo producto 1",
+                            "description": "Descripcion del producto 1",
+                            "price": 2.34,
+                            "quantity_available": 2,
+                            "category": "Categoria del producto"
                         }, "schema": {
-                            "$ref": "#/definitions/pan"
+                            "$ref": "#/definitions/producto"
                         }
                     }, "403": {
                         "description": "Prohibido"
@@ -400,24 +402,29 @@
                 }
             }
         },
-        "pan": {
+        "producto": {
             "type": "object",
             "properties": {
                 "id": {
                     "type": "number",
-                    "description": "ID del pan"
+                    "description": "ID del producto"
                 },
                 "name": {
                     "type": "string",
-                    "description": "Nombre del pan"
+                    "description": "Nombre del producto"
                 },
                 "description": {
                     "type": "string",
-                    "description": "Descripcion acerca del pan"
+                    "description": "Descripcion acerca del producto"
                 },
                 "price": {
-                    "type": "float",
-                    "description": "Precio del pan"
+                    "type": "number",
+                    "format": "float",
+                    "description": "Precio del producto"
+                },
+                "quantity_available": {
+                    "type": "number",
+                    "description": "Cantidad disponible en stock"
                 }
             }
         },
