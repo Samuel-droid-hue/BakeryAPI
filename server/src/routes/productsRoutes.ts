@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { breadsControllers } from "../controllers/breadsControllers";
+import { productsControllers } from "../controllers/productsControllers";
 
 class BreadsRoutes {
     public router: Router=Router();
@@ -9,8 +9,8 @@ class BreadsRoutes {
     }
 
     config(): void {
-        this.router.get('/', breadsControllers.getItems);
-        this.router.get('/:id', breadsControllers.getBread);
+        this.router.get('/', productsControllers.getItems);
+        this.router.get('/:id', productsControllers.getItem);
     }
 }
 

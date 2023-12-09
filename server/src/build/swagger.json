@@ -17,6 +17,10 @@
             "description": "API para obtener informacion acerca de los usuarios de la plataforma."
         },
         {
+            "name": "Autenticacion",
+            "description": "API para obtener autenticaciones utilizadas en la plataforma."
+        },
+        {
             "name": "Productos",
             "description": "API para obtener informacion acerca los productos de la panaderia."
         },
@@ -194,19 +198,67 @@
                 }
             }
         },
-        "/api/breads/": {
+        "/api/auth/": {
+            "get": {
+                "tags": ["Autenticacion"],
+                "summary": "Obtiene la autenticacion de login.",
+                "description": "Este servicio devuelve a un usuario en caso de este exista y sea logeado con las credenciales correctas.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "id": 3,
+                            "full_name": "Ejemplo de Nombre",
+                            "email": "correo@ejemplo.com",
+                            "password": "ejemplo",
+                            "phone_number": "123456789",
+                            "address": "Dirección de Ejemplo",
+                            "role": "Rol del ejemplo"
+                        }, "schema": {
+                            "$ref": "#/definitions/usuario"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "requiere": true,
+                        "required": true,
+                        "description": "Correo electronico del usuario.",
+                        "type": "string",
+                        "default": "None"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "requiere": true,
+                        "required": true,
+                        "description": "Contrasena del usuario.",
+                        "type": "string",
+                        "default": "None"
+                    }
+                ]
+            }
+        },
+        "/api/products/": {
             "get": {
                 "tags": ["Productos"],
                 "summary": "Lista de todos los panes en exhibición.",
-                "description": "Este servicio devuelve una lista completa de los <strong>panes en exhibición</strong> disponibles en la plataforma. <br> <br>Proporciona información detallada, incluyendo: <br><ul><li>Nombre del pan</li><li>Descripción</li><li>Precio</li> <li>Imagen del pan</li></ul>",
+                "description": "Este servicio devuelve una lista completa de los <strong>productos en exhibición</strong> disponibles en la plataforma. <br> <br>Proporciona información detallada, incluyendo: <br><ul><li>Nombre del producto</li><li>Descripción</li><li>Precio</li> <li>Cantidad</li><li>Categoria</li></ul>",
                 "responses": {
                     "200": {
                         "description": "OK",
                         "examples": {
                             "id": 1,
-                            "name": "Example Bread 1",
-                            "description": "Example description 1",
-                            "price": 2.34
+                            "name": "Ejemplo producto 1",
+                            "description": "Descripcion del producto 1",
+                            "price": 2.34,
+                            "quantity_available": 2,
+                            "category": "Categoria del producto"
                         }, "schema": {
                             "$ref": "#/definitions/pan"
                         }

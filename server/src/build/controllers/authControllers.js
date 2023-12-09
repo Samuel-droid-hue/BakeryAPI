@@ -12,25 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.breadsControllers = void 0;
+exports.authControllers = void 0;
 const database_1 = __importDefault(require("../database"));
-class BreadsControllers {
-    getItems(req, res) {
+class AuthControllers {
+    getUsers(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const answer = yield database_1.default.query('SELECT * FROM BakeryItems');
-            res.json(answer);
-        });
-    }
-    getBread(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
-            const answer = yield database_1.default.query('SELECT * FROM Bread WHERE id = ?', [id]);
+            const { email, password } = req.query;
+            const answer = yield database_1.default.query('SELECT * FROM Users WHERE email = ? AND password = ?', [email, password]);
             if (answer.length > 0) {
                 res.json(answer[0]);
                 return;
             }
-            res.status(404).json({ 'message': 'Bread not found!' });
+            res.status(404).json({ 'message': 'Usuario no encontrado o credenciales incorrectas!' });
         });
     }
 }
-exports.breadsControllers = new BreadsControllers();
+exports.authControllers = new AuthControllers();

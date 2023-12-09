@@ -8,9 +8,10 @@ const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 const usersRoutes_1 = __importDefault(require("./routes/usersRoutes"));
 const othersRoutes_1 = __importDefault(require("./routes/othersRoutes"));
+const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const swagger_json_1 = __importDefault(require("./swagger.json"));
-const breadsRoutes_1 = __importDefault(require("./routes/breadsRoutes"));
+const productsRoutes_1 = __importDefault(require("./routes/productsRoutes"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -27,7 +28,8 @@ class Server {
     }
     routes() {
         this.app.use('/api/users/', usersRoutes_1.default);
-        this.app.use('/api/breads/', breadsRoutes_1.default);
+        this.app.use('/api/auth/', authRoutes_1.default);
+        this.app.use('/api/products/', productsRoutes_1.default);
         this.app.use('/api/others/', othersRoutes_1.default);
     }
     start() {

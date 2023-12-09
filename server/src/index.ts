@@ -3,9 +3,10 @@ import morgan from 'morgan';
 import cors from 'cors';
 import usersRoutes from './routes/usersRoutes';
 import othersRoutes from './routes/othersRoutes';
+import authRoutes from './routes/authRoutes';
 import swagger_ui_express from 'swagger-ui-express';
 import swaggerDocument from './swagger.json';
-import breadsRoutes from './routes/breadsRoutes';
+import breadsRoutes from './routes/productsRoutes';
 
 class Server {
     public app: Application;
@@ -26,7 +27,8 @@ class Server {
 
     routes (): void {
         this.app.use('/api/users/', usersRoutes);
-        this.app.use('/api/breads/', breadsRoutes);
+        this.app.use('/api/auth/', authRoutes);
+        this.app.use('/api/products/', breadsRoutes);
         this.app.use('/api/others/', othersRoutes);
     }
 

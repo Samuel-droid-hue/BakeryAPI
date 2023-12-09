@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import pool from "../database";
 
-class BreadsControllers {
+class ProductsControllers {
     public async getItems(req: Request, res: Response): Promise<void> {
         const answer = await pool.query('SELECT * FROM BakeryItems');
         res.json(answer);
     }
 
-    public async getBread(req: Request, res: Response): Promise<void> {
+    public async getItem(req: Request, res: Response): Promise<void> {
         const {id} = req.params;
         const answer = await pool.query('SELECT * FROM Bread WHERE id = ?', [id]);
         if(answer.length > 0) {
@@ -18,4 +18,4 @@ class BreadsControllers {
     }
 }
 
-export const breadsControllers = new BreadsControllers();
+export const productsControllers = new ProductsControllers();
