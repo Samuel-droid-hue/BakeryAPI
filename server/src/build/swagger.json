@@ -357,6 +357,29 @@
                         "description": "Prohibido"
                     }
                 }
+            },
+            "delete": {
+                "tags": ["Productos"],
+                "summary": "Eliminar un producto",
+                "description": "Este servicio permite eliminar un <strong>producto</strong> de la plataforma. <br> <br> Al utilizar este servicio, se eliminarán todos los datos asociados con el producto especificado. <br> <br> **Nota:** Esta acción es irreversible y eliminará permanentemente el producto de la plataforma.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del producto",
+                        "type": "number",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
             }
         },
         "/api/others/categories/": {

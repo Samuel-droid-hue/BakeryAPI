@@ -46,6 +46,12 @@ class ProductsControllers {
         const answer = await pool.query('UPDATE BakeryItems SET ? WHERE id = ?', [req.body, id]);
         res.json(answer);
     }
+
+    public async deleteItem(req: Request, res: Response): Promise<void> {
+        const {id} = req.params;
+        const answer = await pool.query(`DELETE FROM BakeryItems WHERE id = ${id}`);
+        res.json(answer);
+    }
 }
 
 export const productsControllers = new ProductsControllers();

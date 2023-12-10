@@ -12,6 +12,7 @@ class BreadsRoutes {
         this.router.get('/:id', productsControllers_1.productsControllers.getItem);
         this.router.post('/', productsControllers_1.productsControllers.createItem);
         this.router.put('/:id', productsControllers_1.productsControllers.updateItem);
+        this.router.delete('/:id', productsControllers_1.productsControllers.deleteItem);
     }
 }
 const breadsRoutes = new BreadsRoutes();
