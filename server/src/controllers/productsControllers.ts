@@ -40,6 +40,12 @@ class ProductsControllers {
         const answer = await pool.query('INSERT INTO BakeryItems set ?', [req.body, id]);
         res.json(answer);
     }
+
+    public async updateItem(req: Request, res:Response): Promise<void> {
+        const {id} = req.params;
+        const answer = await pool.query('UPDATE BakeryItems SET ? WHERE id = ?', [req.body, id]);
+        res.json(answer);
+    }
 }
 
 export const productsControllers = new ProductsControllers();

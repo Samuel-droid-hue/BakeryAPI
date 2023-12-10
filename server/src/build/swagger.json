@@ -325,6 +325,38 @@
                         "default": 1
                     }
                 ]
+            },
+            "put": {
+                "tags": ["Productos"],
+                "summary": "Modifica la información de un producto",
+                "description": "Este servicio permite realizar modificaciones en la <em>información</em> de un <strong>producto existente</strong>. <br> <br>Para utilizar este servicio, envía una solicitud con los datos actualizados del producto. La respuesta contendrá la información modificada. <br> <br> **Nota:** Asegúrate de proporcionar todos los campos necesarios en la solicitud, incluyendo el ID del producto que se va a modificar.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del producto",
+                        "type": "number",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "producto",
+                        "in": "body",
+                        "description": "Producto a modificar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevoProducto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
             }
         },
         "/api/others/categories/": {

@@ -57,5 +57,12 @@ class ProductsControllers {
             res.json(answer);
         });
     }
+    updateItem(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const answer = yield database_1.default.query('UPDATE BakeryItems SET ? WHERE id = ?', [req.body, id]);
+            res.json(answer);
+        });
+    }
 }
 exports.productsControllers = new ProductsControllers();
