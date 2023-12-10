@@ -12,6 +12,7 @@ const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const swagger_json_1 = __importDefault(require("./swagger.json"));
 const productsRoutes_1 = __importDefault(require("./routes/productsRoutes"));
+const basketsRoutes_1 = __importDefault(require("./routes/basketsRoutes"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -30,6 +31,7 @@ class Server {
         this.app.use('/api/users/', usersRoutes_1.default);
         this.app.use('/api/auth/', authRoutes_1.default);
         this.app.use('/api/products/', productsRoutes_1.default);
+        this.app.use('/api/baskets/', basketsRoutes_1.default);
         this.app.use('/api/others/', othersRoutes_1.default);
     }
     start() {

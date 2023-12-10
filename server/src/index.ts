@@ -7,6 +7,7 @@ import authRoutes from './routes/authRoutes';
 import swagger_ui_express from 'swagger-ui-express';
 import swaggerDocument from './swagger.json';
 import productsRoutes from './routes/productsRoutes';
+import basketsRoutes from './routes/basketsRoutes';
 
 class Server {
     public app: Application;
@@ -29,6 +30,7 @@ class Server {
         this.app.use('/api/users/', usersRoutes);
         this.app.use('/api/auth/', authRoutes);
         this.app.use('/api/products/', productsRoutes);
+        this.app.use('/api/baskets/', basketsRoutes);
         this.app.use('/api/others/', othersRoutes);
     }
 

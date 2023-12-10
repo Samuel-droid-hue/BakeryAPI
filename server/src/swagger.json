@@ -27,6 +27,10 @@
         {
             "name": "Categorias de Productos",
             "description": "API para obtener informacion acerca de las categorias de los productos."
+        },
+        {
+            "name": "Cesta de Compras",
+            "description": "API para obtener la informacion acerca de la cesta de compras de un usuario."
         }
     ],
     "schemes": [
@@ -455,6 +459,41 @@
                         "description": "Prohibido"
                     }
                 }
+            }
+        },
+
+        "/api/baskets/{id}": {
+            "get": {
+                "tags": ["Cesta de Compras"],
+                "summary": "Lista la informacion de productos de una cesta de compras.",
+                "description": "Este servicio devuelve la <em>información</em> detallada de <strong>productos relacionados con una cesta de compras de usuario</strong>. <br> <br>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "id": 1,
+                            "name": "Ejemplo producto 1",
+                            "description": "Descripcion del producto 1",
+                            "price": 2.34,
+                            "quantity_available": 2,
+                            "category": "Categoria del producto"
+                        }, "schema": {
+                            "$ref": "#/definitions/producto"
+                        }
+                    }, "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del usuario",
+                        "type": "number",
+                        "default": 0
+                    }
+                ]
             }
         }
     },
