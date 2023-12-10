@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { productsControllers } from "../controllers/productsControllers";
 
-class BreadsRoutes {
+class ProductsRoutes {
     public router: Router=Router();
 
     constructor() {
@@ -14,8 +14,9 @@ class BreadsRoutes {
         this.router.post('/', productsControllers.createItem);
         this.router.put('/:id', productsControllers.updateItem);
         this.router.delete('/:id', productsControllers.deleteItem);
+        this.router.get('/filter/:category', productsControllers.filterItemByCategory);
     }
 }
 
-const breadsRoutes = new BreadsRoutes();
-export default breadsRoutes.router;
+const productsRoutes = new ProductsRoutes();
+export default productsRoutes.router;

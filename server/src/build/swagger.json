@@ -224,7 +224,7 @@
                 },
                 "parameters": [
                     {
-                        "name": "email",
+                        "name": "Email",
                         "in": "query",
                         "requiere": true,
                         "required": true,
@@ -233,7 +233,7 @@
                         "default": "None"
                     },
                     {
-                        "name": "password",
+                        "name": "Password",
                         "in": "query",
                         "requiere": true,
                         "required": true,
@@ -380,6 +380,40 @@
                         "description": "Prohibido"
                     }
                 }
+            }
+        },
+        "/api/products/filter/{category}": {
+            "get": {
+                "tags": ["Productos"],
+                "summary": "Lista la informacion de productos de una determinada categoria.",
+                "description": "Este servicio devuelve la <em>información</em> detallada de <strong>productos relacionados con la categoria específicada</strong>. <br> <br>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "id": 1,
+                            "name": "Ejemplo producto 1",
+                            "description": "Descripcion del producto 1",
+                            "price": 2.34,
+                            "quantity_available": 2,
+                            "category": "Categoria del producto"
+                        }, "schema": {
+                            "$ref": "#/definitions/producto"
+                        }
+                    }, "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID categoria del producto",
+                        "type": "number",
+                        "default": 0
+                    }
+                ]
             }
         },
         "/api/others/categories/": {

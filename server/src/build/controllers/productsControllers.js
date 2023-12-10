@@ -71,5 +71,25 @@ class ProductsControllers {
             res.json(answer);
         });
     }
+    filterItemByCategory(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { category } = req.params;
+            const answer = yield database_1.default.query(`SELECT
+            BakeryItems.id, 
+            BakeryItems.name, 
+            BakeryItems.description, 
+            BakeryItems.price, 
+            BakeryItems.quantity_available, 
+            CategoriesItems.name AS category
+            FROM BakeryItems
+            JOIN CategoriesItems ON BakeryItems.category = CategoriesItems.id
+            WHERE BakeryItems.quantity_available > 0 AND BakeryItems.category = ?`, [category]);
+            if (answer.length > 0) {
+                res.json(answer[0]);
+                return;
+            }
+            res.status(404).json({ 'message': 'No existen productos de esta categoria!' });
+        });
+    }
 }
 exports.productsControllers = new ProductsControllers();
