@@ -495,6 +495,80 @@
                     }
                 ]
             }
+        },
+
+        "/api/baskets/": {
+            "post": {
+                "tags": ["Cesta de Compras"],
+                "summary": "Registro de un nuevo producto en la cesta de compras.",
+                "description": "Este servicio permite agregar un nuevo producto a la cesta de compras.<br><br>Debera proporcionar la siguiente informacion: <br><br> <ul><li>ID del usuario</li><li>ID del producto</li><li>Precio</li><li>Cantidad del producto</li></ul>",
+                "parameters": [
+                    {
+                        "name": "id_client",
+                        "in": "query",
+                        "description": "ID del cliente",
+                        "required": true,
+                        "type": "number",
+                        "default": 0
+                    }, 
+                    {
+                        "name": "id_product",
+                        "in": "query",
+                        "description": "ID del producto",
+                        "required": true,
+                        "type": "number",
+                        "default": 0
+                    },
+                    {
+                        "name": "quantity",
+                        "in": "query",
+                        "description": "Cantidad del producto",
+                        "required": true,
+                        "type": "number",
+                        "default": 0
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            },
+
+            "delete": {
+                "tags": ["Cesta de productos"],
+                "summary": "Eliminar un producto de la cesta de compras",
+                "description": "Este servicio permite eliminar un <strong>producto</strong> de la cesta de compras de un usuario. <br> <br> Al utilizar este servicio, se eliminarán todos las cantidades asociadadas con el producto especificado.",
+                "parameters": [
+                    {
+                        "name": "id_client",
+                        "in": "query",
+                        "description": "ID del cliente",
+                        "type": "number",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "id_product",
+                        "in": "query",
+                        "description": "ID del producto",
+                        "type": "number",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
         }
     },
 

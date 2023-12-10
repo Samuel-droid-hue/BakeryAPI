@@ -9,7 +9,9 @@ class BasketsRoutes {
     }
 
     config(): void {
-        this.router.get('/:id', basketsControllers.getBasket)
+        this.router.get('/:id', basketsControllers.getBasket);
+        this.router.post('/', basketsControllers.addItem);
+        this.router.delete('/', basketsControllers.deleteItem);
     }
 }
 

@@ -24,10 +24,25 @@ class BasketsControllers {
             JOIN BakeryItems ON Baskets.product_id = BakeryItems.id
             WHERE Baskets.client_id = ?;`, [id]);
             if (answer.length > 0) {
-                res.json(answer[0]);
+                res.json(answer);
                 return;
             }
             res.status(404).json({ 'message': 'El carrito se encuentra vacio!' });
+        });
+    }
+    addItem(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id_client, id_product, quantity } = req.query;
+            const answer = yield database_1.default.query(`INSERT INTO Baskets (client_id, product_id, quantity)
+        VALUES(?, ?, ?) ON DUPLICATE KEY UPDATE quantity = quantity + ?`, [id_client, id_product, quantity, quantity]);
+            res.json(answer);
+        });
+    }
+    deleteItem(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id_client, id_product } = req.query;
+            const answer = yield database_1.default.query('DELETE FROM Baskets WHERE client_id = ? AND product_id = ?', [id_client, id_product]);
+            res.json(answer);
         });
     }
 }
