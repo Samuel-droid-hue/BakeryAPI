@@ -45,5 +45,22 @@ class BasketsControllers {
             res.json(answer);
         });
     }
+    buyItem(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id_client } = req.query;
+            const basketQuery = yield database_1.default.query(`SELECT Baskets.client_id, Baskets.product_id, Baskets.quantity, BakeryItems.price FROM Baskets 
+        JOIN BakeryItems ON Baskets.product_id = BakeryItems.id 
+        WHERE client_id = ?`, [id_client]);
+            if (basketQuery.length > 0) {
+                let total = 0;
+                for (const i of basketQuery) {
+                    total += i.quantity * i.price;
+                }
+                const insertQuery = yield database_1.default.query(`INSERT INTO Sales (id_client, total) VALUES (?, ?)`, [id_client, total]);
+                const deleteQuery = yield database_1.default.query(`DELETE FROM Baskets WHERE client_id = ?`, [id_client]);
+                res.json(insertQuery);
+            }
+        });
+    }
 }
 exports.basketsControllers = new BasketsControllers();

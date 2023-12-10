@@ -481,6 +481,31 @@
                         "default": 0
                     }
                 ]
+            },
+            "post": {
+                "summary": "Confirmacion de la compra",
+                "description": "<html>Este servicio permite agregar un nuevo registro de compra.<br><br>Debera proporcionar id del cliente.</html>",
+                "produces": ["application/json"],
+                "tags": ["Cesta de Compras"],
+                "parameters": [
+                    {
+                        "name": "id_client",
+                        "in": "query",
+                        "description": "ID del usuario",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevoUsuario"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
             }
         },
         "/api/baskets/": {
@@ -524,7 +549,7 @@
                 }
             },
             "delete": {
-                "tags": ["Cesta de productos"],
+                "tags": ["Cesta de Compras"],
                 "summary": "Eliminar un producto de la cesta de compras",
                 "description": "Este servicio permite eliminar un <strong>producto</strong> de la cesta de compras de un usuario. <br> <br> Al utilizar este servicio, se eliminarán todos las cantidades asociadadas con el producto especificado.",
                 "parameters": [

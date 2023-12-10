@@ -28,6 +28,26 @@ class BasketsControllers {
         const answer = await pool.query('DELETE FROM Baskets WHERE client_id = ? AND product_id = ?', [id_client, id_product]);
         res.json(answer);
     }
+
+    public async buyItem(req: Request, res:Response): Promise<void> {
+        const {id_client} = req.query;
+        const basketQuery = await pool.query(`SELECT Baskets.client_id, Baskets.product_id, Baskets.quantity, BakeryItems.price FROM Baskets 
+        JOIN BakeryItems ON Baskets.product_id = BakeryItems.id 
+        WHERE client_id = ?`, [id_client]);
+
+        if(basketQuery.length > 0) {
+            let total = 0;
+            for (const i of basketQuery) {
+                total += i.quantity * i.price;
+            }
+            
+            const insertQuery = await pool.query(`INSERT INTO Sales (id_client, total) VALUES (?, ?)`, [id_client, total]);
+
+            const deleteQuery = await pool.query(`DELETE FROM Baskets WHERE client_id = ?`, [id_client]);
+
+            res.json(insertQuery);
+        }
+    }
 }
 
 export const basketsControllers = new BasketsControllers();

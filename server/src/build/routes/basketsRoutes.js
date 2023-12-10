@@ -11,6 +11,7 @@ class BasketsRoutes {
         this.router.get('/:id', basketsControllers_1.basketsControllers.getBasket);
         this.router.post('/', basketsControllers_1.basketsControllers.addItem);
         this.router.delete('/', basketsControllers_1.basketsControllers.deleteItem);
+        this.router.post('/:id', basketsControllers_1.basketsControllers.buyItem);
     }
 }
 const basketsRoutes = new BasketsRoutes();
