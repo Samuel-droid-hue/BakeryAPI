@@ -34,6 +34,12 @@ class ProductsControllers {
         }
         res.status(404).json({'message':'Producto no existente en exhibicion!'});
     }
+
+    public async createItem(req: Request, res: Response): Promise<void> {
+        const {id} = req.params;
+        const answer = await pool.query('INSERT INTO BakeryItems set ?', [req.body, id]);
+        res.json(answer);
+    }
 }
 
 export const productsControllers = new ProductsControllers();

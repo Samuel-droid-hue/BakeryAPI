@@ -255,7 +255,7 @@
         "/api/products/": {
             "get": {
                 "tags": ["Productos"], 
-                "summary": "Lista de todos los panes en exhibición.",
+                "summary": "Lista de todos los productos en exhibición.",
                 "description": "Este servicio devuelve una lista completa de los <strong>productos en exhibición</strong> disponibles en la plataforma. <br> <br>Proporciona información detallada, incluyendo: <br><ul><li>Nombre del producto</li><li>Descripción</li><li>Precio</li> <li>Cantidad</li><li>Categoria</li></ul>",
                 "responses": {
                     "200": {
@@ -270,6 +270,31 @@
                         }, "schema": {
                             "$ref": "#/definitions/producto"
                         }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            },
+
+            "post": {
+                "tags": ["Productos"],
+                "summary": "Registro de un nuevo producto.",
+                "description": "Este servicio permite agregar un nuevo producto a la plataforma.<br><br>Debera proporcionar la siguiente informacion detallada del producto: <br><br> <ul><li>Nombre del producto</li><li>Descripcion del producto</li><li>Precio</li><li>Cantidad en stock</li><li>Categoria</li></ul>",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "body",
+                        "description": "Producto a agregar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevoProducto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "OK"
                     },
                     "403": {
                         "description": "Prohibido"
@@ -436,6 +461,36 @@
                 "quantity_available": {
                     "type": "number",
                     "description": "Cantidad disponible en stock"
+                },
+                "category": {
+                    "type": "number",
+                    "description": "ID de la categoria del producto"
+                }
+            }
+        },
+        "nuevoProducto": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Nombre del producto"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Descripcion acerca del producto"
+                },
+                "price": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Precio del producto"
+                },
+                "quantity_available": {
+                    "type": "number",
+                    "description": "Cantidad disponible en stock"
+                },
+                "category": {
+                    "type": "number",
+                    "description": "ID de la categoria del producto"
                 }
             }
         },

@@ -10,6 +10,7 @@ class BreadsRoutes {
     config() {
         this.router.get('/', productsControllers_1.productsControllers.getItems);
         this.router.get('/:id', productsControllers_1.productsControllers.getItem);
+        this.router.post('/', productsControllers_1.productsControllers.createItem);
     }
 }
 const breadsRoutes = new BreadsRoutes();
