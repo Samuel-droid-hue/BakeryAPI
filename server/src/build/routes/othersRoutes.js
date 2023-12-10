@@ -9,6 +9,8 @@ class OthersRoutes {
     }
     config() {
         this.router.get('/categories', othersControllers_1.othersControllers.getCategories);
+        this.router.get('/sales/:id', othersControllers_1.othersControllers.getSale);
+        this.router.get('/sales/', othersControllers_1.othersControllers.getSales);
     }
 }
 const othersRoutes = new OthersRoutes();

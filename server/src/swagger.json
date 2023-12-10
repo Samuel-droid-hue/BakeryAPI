@@ -31,6 +31,10 @@
         {
             "name": "Cesta de Compras",
             "description": "API para obtener la informacion acerca de la cesta de compras de un usuario."
+        },
+        {
+            "name": "Lista de Ventas",
+            "description": "API para obtener la informacion acercad de las ventas realizadas en la plataforma."
         }
     ],
     "schemes": [
@@ -596,6 +600,64 @@
                     }
                 }
             }
+        },
+
+        "/api/others/sales/{id}": {
+            "get": {
+                "tags": ["Lista de Ventas"], 
+                "summary": "Lista todos las compras realizadas por un usuario.",
+                "description": "Este servicio devuelve una lista completa de los <strong>montos de compra por un usuario</strong>. <br> <br>",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ID del cliente",
+                        "type": "number",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "id": 1,
+                            "id_client": 1,
+                            "sale_date": "2021-09-90",
+                            "total": 90
+                        }, "schema": {
+                            "$ref": "#/definitions/venta"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+
+        "/api/others/sales/": {
+            "get": {
+                "tags": ["Lista de Ventas"], 
+                "summary": "Lista todos las compras realizadas por todos los usuarios.",
+                "description": "Este servicio devuelve una lista completa de los <strong>montos de compra por todos los usuarios</strong>. <br> <br>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "id": 1,
+                            "id_client": 1,
+                            "sale_date": "2021-09-90",
+                            "total": 90
+                        }, "schema": {
+                            "$ref": "#/definitions/venta"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
         }
     },
 
@@ -734,6 +796,29 @@
                 "name": {
                     "type": "string",
                     "description": "Nombre del objeto"
+                }
+            }
+        },
+        "venta": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "id del la venta"
+                },
+                "id_client": {
+                    "type": "number",
+                    "description": "Id del cliente"
+                },
+                "sale_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Fecha de la venta"
+                },
+                "total": {
+                    "type": "number",
+                    "format": "decimal",
+                    "description": "Total de la compra realizada"
                 }
             }
         }

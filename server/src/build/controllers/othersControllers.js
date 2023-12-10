@@ -21,5 +21,18 @@ class OthersControllers {
             res.json(answer);
         });
     }
+    getSale(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.query;
+            const answer = yield database_1.default.query('SELECT * FROM Sales WHERE id_client = ?', [id]);
+            res.json(answer);
+        });
+    }
+    getSales(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const answer = yield database_1.default.query('SELECT * FROM Sales WHERE id_client');
+            res.json(answer);
+        });
+    }
 }
 exports.othersControllers = new OthersControllers();
